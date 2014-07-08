@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/animate.css">
+        <link rel="stylesheet" href="css/iconStyles.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+        <script type="text/template" id="temp_track">
+
+            <div class="indivTrack" data-position="<%= position %>">
+                <aside class="downVote voteWrap">
+                    <span class="icon icon-down"></span>
+                </aside>
+
+                <section class="trackInfoWrap">
+                    <span class="trackName"><%= track_name %></span>
+                    <span class="trackArtist"><%= track_artist %></span>
+                    <span class="addedBy"><%= added_by %></span>
+                </section>
+
+                <aside class="upVote voteWrap">
+                    <span class="icon icon-up"></span>
+                </aside>
+                <div class="cf"></div>
+
+            </div>
+        </script>
+        <script type="text/template" id="temp_error">
+            <div class="errorWrap">
+                <span class="errorMessage"><%= error_message %></span>
+                <span class="errorDescription"><%= error_description %></span>
+
+                <!-- for testing only -->
+                <a href="#" id="clearLS">Clear local storage</a>
+            </div>
+        </script>
+       <script type="text/template" id="temp_current_track">
+        <div class="indivTrack current">
+           <section class="trackInfoWrap">
+            <span class="trackName"> <%= track_name %></span>
+            <span class="trackArtist"><%= track_artist %></span>
+            <span class="addedBy"><%= added_by %></span>
+            </section>
+            <div class="cf"></div>
+        </div>
+        </script>
+        
+        <script type="text/template" id="temp_track_search_result">
+        <div class="indivTrack searchResult">
+           <section class="trackInfoWrap">
+            <span class="trackName"> <%= track_name %></span>
+            <span class="trackArtist"><%= track_artist %></span>
+            <span class="addedBy"><%= added_by %></span>
+            </section>
+            <div class="cf"></div>
+        </div>
+        </script>
+        
+        <script type="text/template" id="temp_vote_note">
+            <div class="voteNote <%= direction %>">
+                <span><%= votes_remaining %> Vote(s) left!</span>
+            </div>
+        </script>
+        <script type="text/template" id="temp_spotify_search">
+            <p id="searchToggle">+</p>
+            <div class="searchWrapper" id="spSearchView">
+           		<input type="text" id="spotifySearchInput" placeholder="e.g. 'Never gonna give you up'" />
+              	<ul id="spSearchResults">
+              		
+              	</ul>
+            </div>
+            </script>
+
+
+    </head>
+    <body>
+        <div id="debug">
+            <h2>Debug Menu</h2>
+            <a href="#" id="addSong">Add dummy song</a>
+            <a href="#" id="removeSong">Remove dummy song</a>
+            <a href="#" id="clearLS">Set User Votes = 10</a>
+        </div>
+
+    <div id="spinWrap">
+    	<div class="spinner top"></div>
+    	<div class="spinner bottom"></div>
+    </div>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <section class="application-view active" id="login">
+            <div class="loginWrapper animated">
+                <h1>Select a Username</h1>
+                <input type="text" id="username" placeholder="it's cooler if you do!" />
+                <a href="#" id="loginSubmit">Log In</a>
+            </div>
+        </section>
+
+        <section class="application-view" id="tracks">
+            <div class="appWrapper">
+                <ul class="tracksWrapper">
+
+                </ul>
+                
+            </div>
+            <div class="searchWrap">
+            </div>
+
+        </section>
+
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <!-- <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script> -->
+        <script src="node_modules/socket.io/node_modules/socket.io-client/socket.io.js"></script>
+        <script src="bower_components/underscore/underscore.js"></script>
+        <script src="bower_components/backbone/backbone.js"></script>
+        <script src="js/prefixfree.js"></script>
+
+
+        <script src="js/app/model/TrackModel.js"></script>
+        <script src="js/app/collection/TrackCollection.js"></script>
+
+        <script src="js/app/views/CurrentTrackView.js"></script>
+        <script src="js/app/views/LoginView.js"></script>
+        <script src="js/app/views/SpotifySearch.js"></script>
+        <script src="js/app/views/TrackListView.js"></script>
+        <script src="js/app/views/TrackView.js"></script>
+        <script src="js/app/views/AppView.js"></script>
+
+        <script src="js/main.js"></script>
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+
+
+
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='//www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X');ga('send','pageview');
+        </script>
+    </body>
+</html>
